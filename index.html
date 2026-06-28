@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Undangan Pernikahan – Ariana &amp; Rafli</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+  <style id="dynamic-css">
+    :root {
+      --ivory:   #FAF6F0;
+      --rose:    #C9A0A0;
+      --wine:    #5C2D2D;
+      --gold:    #C9A06A;
+      --sage:    #A8B5A2;
+      --dark:    #2E1A1A;
+      --ff-disp: 'Cormorant Garamond', Georgia, serif;
+      --ff-body: 'Lato', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ivory);
+      color: var(--dark);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    body.cover-locked { overflow: hidden !important; }
+
+    /* ── Cover ── */
+    #cover {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #3a1818 0%, var(--wine) 55%, #7a3a3a 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; position: relative;
+      overflow: hidden; padding: 2rem;
+    }
+    #cover::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 30%, rgba(201,160,106,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 80%, rgba(201,160,160,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cover-eyebrow { font-family: var(--ff-body); font-size:.72rem; letter-spacing:.35em; text-transform:uppercase; color: var(--gold); margin-bottom:1.6rem; }
+    .cover-names { font-family: var(--ff-disp); font-size: clamp(3.2rem,10vw,7rem); font-weight:300; font-style:italic; color: var(--ivory); line-height:1; }
+    .cover-amp { display:block; font-size:clamp(2rem,6vw,3.8rem); color: var(--gold); font-style:normal; margin:.3rem 0; }
+    .cover-date { margin-top:2rem; font-family:var(--ff-body); font-size:.82rem; letter-spacing:.28em; text-transform:uppercase; color:rgba(250,246,240,.65); }
+    .floral-divider { width:min(260px,60vw); margin:1.6rem auto; opacity:.7; }
+    .btn-envelope {
+      display:inline-flex; align-items:center; gap:.6rem;
+      margin-top:2.4rem; padding:.75rem 2.2rem;
+      background:transparent; border:1px solid var(--gold);
+      color:var(--gold); font-family:var(--ff-body);
+      font-size:.78rem; letter-spacing:.2em; text-transform:uppercase;
+      cursor:pointer; transition:background .3s,color .3s; border-radius:0;
+    }
+    .btn-envelope:hover { background:var(--gold); color:var(--wine); }
+
+    /* ── Sections ── */
+    section { padding:6rem 1.5rem; }
+    .section-eyebrow { font-family:var(--ff-body); font-size:.68rem; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem; }
+    .section-title { font-family:var(--ff-disp); font-size:clamp(2rem,5vw,3rem); font-weight:400; font-style:italic; color:var(--wine); line-height:1.15; }
+    .thin-rule { width:48px; height:1px; background:var(--gold); margin:1.4rem auto; }
+    p.lead-copy { font-family:var(--ff-disp); font-size:1.15rem; font-weight:300; color:#6b4444; line-height:1.8; max-width:520px; margin:0 auto; }
+
+    /* ── Couple ── */
+    #couple { background:var(--ivory); }
+    .couple-card { background:#fff; border:1px solid rgba(201,160,160,.25); padding:2.8rem 2rem; text-align:center; position:relative; }
+    .couple-card::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:48px; height:3px; background:var(--gold); }
+    .couple-photo { width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--rose); margin-bottom:1.2rem; }
+    .couple-name { font-family:var(--ff-disp); font-size:1.7rem; font-weight:400; font-style:italic; color:var(--wine); }
+    .couple-fullname { font-family:var(--ff-body); font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--rose); margin-top:.2rem; }
+    .couple-parents { font-family:var(--ff-disp); font-size:.98rem; color:#9e7070; margin-top:.8rem; line-height:1.6; }
+
+    /* ── Event ── */
+    #event { background:#f3ede6; }
+    .event-card { background:var(--ivory); border-left:3px solid var(--gold); padding:2rem 2rem 2rem 2.4rem; }
+    .event-card-icon { font-size:1.6rem; color:var(--gold); margin-bottom:.8rem; }
+    .event-card-type { font-family:var(--ff-body); font-size:.68rem; letter-spacing:.3em; text-transform:uppercase; color:var(--sage); }
+    .event-card-title { font-family:var(--ff-disp); font-size:1.5rem; font-style:italic; color:var(--wine); margin:.3rem 0 .8rem; }
+    .event-detail { font-size:.88rem; color:#7a5555; display:flex; align-items:flex-start; gap:.6rem; margin-bottom:.45rem; }
+    .event-detail i { color:var(--gold); margin-top:.15rem; width:14px; }
+
+    /* ── Countdown ── */
+    #countdown { background:var(--wine); }
+    .countdown-title { font-family:var(--ff-disp); font-size:clamp(1.6rem,4vw,2.4rem); font-style:italic; color:var(--ivory); }
+    .countdown-grid { display:flex; justify-content:center; gap:clamp(.8rem,3vw,2.5rem); flex-wrap:wrap; margin-top:2.4rem; }
+    .cd-unit { text-align:center; min-width:72px; }
+    .cd-number { font-family:var(--ff-disp); font-size:clamp(3rem,8vw,5rem); font-weight:300; color:var(--ivory); line-height:1; }
+    .cd-label { font-family:var(--ff-body); font-size:.65rem; letter-spacing:.28em; text-transform:uppercase; color:var(--rose); margin-top:.3rem; }
+    .cd-sep { font-family:var(--ff-disp); font-size:3rem; color:rgba(201,160,106,.4); align-self:flex-start; padding-top:.1rem; }
+
+    /* ── Love Story ── */
+    #lovestory { background: #f9f3ed; padding: 6rem 1.5rem; position: relative; overflow: hidden; }
+    #lovestory::before { content: '❤'; position: absolute; font-size: 32rem; color: rgba(201,160,160,.04); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; line-height: 1; }
+    .ls-timeline { position: relative; max-width: 700px; margin: 0 auto; padding-top: 1rem; }
+    .ls-timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold) 10%, var(--gold) 90%, transparent); transform: translateX(-50%); }
+    .ls-item { display: flex; justify-content: flex-end; padding-right: calc(50% + 2.5rem); margin-bottom: 3.5rem; position: relative; }
+    .ls-item:nth-child(even) { justify-content: flex-start; padding-right: 0; padding-left: calc(50% + 2.5rem); }
+    .ls-item::after { content: ''; position: absolute; left: 50%; top: 1.1rem; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--ivory); box-shadow: 0 0 0 3px rgba(201,160,106,.3); z-index: 1; }
+    .ls-card { background: #fff; border: 1px solid rgba(201,160,160,.2); padding: 1.5rem 1.6rem; max-width: 290px; position: relative; }
+    .ls-card::before { content: ''; position: absolute; top: 1rem; right: -10px; border: 5px solid transparent; border-left-color: rgba(201,160,160,.25); }
+    .ls-item:nth-child(even) .ls-card::before { right: auto; left: -10px; border-left-color: transparent; border-right-color: rgba(201,160,160,.25); }
+    .ls-year { font-family: var(--ff-body); font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+    .ls-title { font-family: var(--ff-disp); font-size: 1.25rem; font-style: italic; font-weight: 600; color: var(--wine); margin-bottom: .5rem; }
+    .ls-desc { font-family: var(--ff-disp); font-size: .96rem; color: #9e7070; line-height: 1.65; }
+    .ls-icon { font-size: 1.4rem; margin-bottom: .6rem; display: block; }
+    .ls-photo-wrap { margin-top: 3rem; position: relative; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .ls-hero-photo { width: 100%; height: 420px; object-fit: cover; display: block; border: 6px solid #fff; box-shadow: 0 20px 60px rgba(92,45,45,.18); }
+    .ls-photo-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(46,26,26,.75), transparent); padding: 2rem 1.5rem 1.2rem; text-align: center; }
+    .ls-photo-caption span { font-family: var(--ff-disp); font-size: 1.6rem; font-style: italic; color: var(--ivory); }
+
+    /* ── Gallery ── */
+    #gallery { padding: 0; overflow: hidden; background: var(--dark); }
+    .gallery-hero { position: relative; height: min(85vh, 700px); overflow: hidden; }
+    .gallery-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 8s ease; }
+    .gallery-hero:hover .gallery-hero-img { transform: scale(1.04); }
+    .gallery-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(46,26,26,.7)); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 3rem 1.5rem; text-align: center; }
+    .gallery-hero-overlay .section-eyebrow { color: var(--gold); margin-bottom: .6rem; }
+    .gallery-hero-overlay .section-title { color: var(--ivory); margin-bottom: .5rem; }
+    .gallery-hero-overlay .thin-rule { background: var(--gold); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .gallery-grid-item { overflow: hidden; height: 300px; position: relative; }
+    .gallery-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+    .gallery-grid-item:hover img { transform: scale(1.07); }
+    .gallery-ticker-wrapper { width: 100%; overflow: hidden; position: relative; padding: 20px 0; background: var(--dark); mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .gallery-ticker-track { display: flex; width: max-content; gap: 16px; animation: jalanTerus 30s linear infinite; }
+    .gallery-ticker-track:hover { animation-play-state: paused; }
+    .ticker-item { width: 380px; height: 260px; flex-shrink: 0; overflow: hidden; border-radius: 4px; position: relative; }
+    .ticker-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .ticker-item:hover img { transform: scale(1.08); }
+    @keyframes jalanTerus { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ── RSVP ── */
+    #rsvp { background:#f3ede6; }
+    .rsvp-form .form-control, .rsvp-form .form-select { border-radius:0; border:1px solid rgba(201,160,160,.5); background:var(--ivory); font-family:var(--ff-body); font-size:.9rem; padding:.7rem 1rem; }
+    .rsvp-form .form-control:focus, .rsvp-form .form-select:focus { border-color:var(--gold); box-shadow:none; }
+    .btn-submit { background:var(--wine); color:var(--ivory); border:none; border-radius:0; font-family:var(--ff-body); font-size:.78rem; letter-spacing:.22em; text-transform:uppercase; padding:.75rem 2.4rem; transition:background .3s; width:100%; }
+    .btn-submit:hover { background:var(--dark); color:var(--ivory); }
+    .btn-submit:disabled { opacity:.6; cursor:not-allowed; }
+    #wish-list { margin-top:2rem; }
+    .wish-card { background:var(--ivory); border:1px solid rgba(201,160,160,.25); padding:1.2rem 1.4rem; margin-bottom:.8rem; }
+    .wish-card-name { font-family:var(--ff-disp); font-size:1rem; font-weight:600; color:var(--wine); }
+    .wish-card-attend { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--sage); margin-left:.6rem; }
+    .wish-card-msg { font-family:var(--ff-disp); font-size:.98rem; font-style:italic; color:#7a5555; margin-top:.4rem; line-height:1.55; }
+    .wish-card-time { font-size:.72rem; color:#bbb; margin-top:.3rem; }
+    .wish-loading { text-align:center; padding:2rem; color:var(--rose); font-family:var(--ff-disp); font-style:italic; }
+
+    /* ── Gift ── */
+    #gift { background:var(--ivory); }
+    .gift-box { border:1px solid rgba(201,160,106,.4); padding:2rem; text-align:center; background:#fff; }
+    .gift-icon { font-size:2.2rem; color:var(--gold); margin-bottom:.8rem; }
+    .gift-bank { font-family:var(--ff-body); font-size:.78rem; letter-spacing:.15em; color:var(--rose); text-transform:uppercase; }
+    .gift-account { font-family:var(--ff-disp); font-size:1.7rem; color:var(--wine); margin:.3rem 0; }
+    .gift-name { font-size:.88rem; color:#9e7070; }
+    .btn-copy { margin-top:1rem; background:transparent; border:1px solid var(--rose); color:var(--rose); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; padding:.5rem 1.4rem; border-radius:0; cursor:pointer; transition:all .3s; }
+    .btn-copy:hover { background:var(--rose); color:#fff; }
+
+    /* ── Footer ── */
+    footer { background:var(--dark); padding:3.5rem 1.5rem; text-align:center; }
+    .footer-names { font-family:var(--ff-disp); font-size:clamp(1.8rem,5vw,3rem); font-style:italic; color:var(--ivory); }
+    .footer-verse { font-family:var(--ff-disp); font-size:.98rem; font-style:italic; color:var(--rose); max-width:400px; margin:1rem auto 0; line-height:1.7; }
+
+    /* ── Music ── */
+    .music-btn { position:fixed; bottom:1.5rem; right:1.5rem; z-index:999; width:48px; height:48px; background:var(--wine); border:none; border-radius:50%; color:var(--ivory); font-size:1.1rem; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 16px rgba(92,45,45,.35); transition:background .3s; }
+    .music-btn:hover { background:var(--gold); color:var(--wine); }
+    .music-btn.playing i { animation:spin 3s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    .emoji-burst { position:fixed; pointer-events:none; z-index:10000; animation:emojiFly 2.5s ease-out forwards; user-select:none; }
+    @keyframes emojiFly { 0%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)} 100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0.3) rotate(var(--rot))} }
+
+    /* ═══════════════════════════════
+       ADMIN PANEL STYLES
+    ═══════════════════════════════ */
+    #admin-overlay {
+      display:none; position:fixed; inset:0; z-index:99999;
+      background:rgba(0,0,0,.8); backdrop-filter:blur(8px);
+      align-items:flex-start; justify-content:center;
+      overflow-y:auto; padding:1rem;
+    }
+    #admin-overlay.active { display:flex; }
+    #admin-modal {
+      background:#1a0e0e; max-width:820px; width:100%;
+      margin:auto; border-top:3px solid #C9A06A;
+      font-family:'Lato',sans-serif; color:#FAF6F0;
+    }
+    .admin-header { background:#2E1A1A; padding:1.2rem 1.5rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(201,160,106,.2); }
+    .admin-header h2 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-style:italic; color:#C9A06A; margin:0; }
+    .admin-close { background:none; border:none; color:#C9A0A0; font-size:1.4rem; cursor:pointer; line-height:1; }
+    .admin-close:hover { color:#FAF6F0; }
+
+    /* Tab Nav */
+    .admin-tabs { display:flex; background:#150a0a; overflow-x:auto; border-bottom:1px solid rgba(201,160,106,.15); }
+    .admin-tab { flex-shrink:0; padding:.7rem 1.1rem; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:#9e7070; background:none; border:none; cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; }
+    .admin-tab.active { color:#C9A06A; border-bottom-color:#C9A06A; background:#1a0e0e; }
+    .admin-tab:hover { color:#FAF6F0; }
+
+    /* Tab Content */
+    .admin-pane { display:none; padding:1.4rem 1.5rem; }
+    .admin-pane.active { display:block; }
+
+    /* Form elements */
+    .admin-group { margin-bottom:1.1rem; }
+    .admin-label { display:block; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:#C9A06A; margin-bottom:.4rem; }
+    .admin-input, .admin-textarea, .admin-select {
+      width:100%; background:#2a1414; border:1px solid rgba(201,160,106,.25);
+      color:#FAF6F0; font-family:'Lato',sans-serif; font-size:.88rem;
+      padding:.55rem .8rem; border-radius:0; outline:none; transition:border .2s;
+    }
+    .admin-input:focus, .admin-textarea:focus, .admin-select:focus { border-color:#C9A06A; }
+    .admin-textarea { resize:vertical; min-height:70px; }
+    .admin-select { appearance:none; }
+    .admin-row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+    .admin-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.8rem; }
+
+    /* Color picker */
+    .color-row { display:flex; align-items:center; gap:.6rem; }
+    .color-row input[type="color"] { width:44px; height:36px; border:1px solid rgba(201,160,106,.3); background:none; cursor:pointer; padding:2px; border-radius:0; flex-shrink:0; }
+    .color-row .admin-input { flex:1; }
+
+    /* Buttons */
+    .btn-admin-save { background:#C9A06A; color:#1a0e0e; border:none; padding:.65rem 1.5rem; font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; font-family:'Lato',sans-serif; font-weight:700; transition:background .2s; }
+    .btn-admin-save:hover { background:#e8b87a; }
+    .btn-admin-danger { background:#c0392b; color:#fff; border:none; padding:.65rem 1.5rem; font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; font-family:'Lato',sans-serif; transition:background .2s; }
+    .btn-admin-danger:hover { background:#e74c3c; }
+    .btn-admin-outline { background:transparent; color:#C9A06A; border:1px solid #C9A06A; padding:.6rem 1.2rem; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; cursor:pointer; font-family:'Lato',sans-serif; transition:all .2s; }
+    .btn-admin-outline:hover { background:#C9A06A; color:#1a0e0e; }
+
+    .admin-save-row { display:flex; gap:.8rem; align-items:center; margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(201,160,106,.15); flex-wrap:wrap; }
+    .admin-toast { font-size:.78rem; color:#A8B5A2; display:none; }
+    .admin-toast.show { display:inline; }
+
+    /* Story items */
+    .story-item-block { background:#2a1414; border:1px solid rgba(201,160,106,.15); padding:1rem; margin-bottom:.8rem; position:relative; }
+    .story-item-block .del-btn { position:absolute; top:.6rem; right:.6rem; background:none; border:none; color:#c0392b; cursor:pointer; font-size:1rem; }
+
+    /* File hint */
+    .admin-hint { font-size:.72rem; color:#9e7070; margin-top:.25rem; line-height:1.4; }
+
+    /* Upload from gallery/drive */
+    .upload-row { display:flex; align-items:center; gap:.6rem; margin-top:.5rem; flex-wrap:wrap; }
+    .admin-file-input { position:absolute; width:1px; height:1px; opacity:0; overflow:hidden; }
+    .btn-upload-label { display:inline-flex; align-items:center; gap:.4rem; cursor:pointer; font-size:.7rem; padding:.5rem 1rem; white-space:nowrap; }
+    .upload-status { font-size:.72rem; color:#A8B5A2; }
+    .upload-status.error { color:#e98a8a; }
+    .upload-thumb { width:44px; height:44px; object-fit:cover; border:1px solid rgba(201,160,106,.3); flex-shrink:0; }
+
+    /* Login */
+    #admin-login { padding:2.5rem 2rem; text-align:center; }
+    #admin-login p { font-family:'Cormorant Garamond',serif; font-size:.95rem; font-style:italic; color:#9e7070; margin-bottom:1.5rem; }
+
+    /* Section divider in admin */
+    .admin-section-title { font-size:.65rem; letter-spacing:.25em; text-transform:uppercase; color:#C9A06A; border-bottom:1px solid rgba(201,160,106,.15); padding-bottom:.4rem; margin:.6rem 0 .9rem; opacity:.7; }
+
+    @media(max-width:600px){
+      .admin-row, .admin-row-3 { grid-template-columns:1fr; }
+      .admin-tabs { flex-wrap:wrap; }
+      .ticker-item { width:260px; height:180px; }
+      .gallery-grid { grid-template-columns:repeat(2,1fr); }
+      .gallery-grid-item { height:200px; }
+      .gallery-hero { height:55vw; min-height:260px; }
+    }
+    @media(max-width:768px){ section{padding:4rem 1rem;} #lovestory{padding:4rem 1rem;} }
+
+    /* Responsive Love Story */
+    @media(max-width:600px){
+      .ls-timeline::before { left:1.2rem; }
+      .ls-item, .ls-item:nth-child(even) { justify-content:flex-start; padding-left:3.5rem; padding-right:0; }
+      .ls-item::after { left:1.2rem; }
+      .ls-card { max-width:100%; }
+      .ls-card::before, .ls-item:nth-child(even) .ls-card::before { display:none; }
+    }
+  </style>
+</head>
+<body class="cover-locked">
+
+<!-- ══ COVER ══ -->
+<section id="cover">
+  <video id="cover-video" autoplay muted loop playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0.6;">
+    <source id="cover-video-src" src="video.mp4" type="video/mp4">
+  </video>
+  <p class="cover-eyebrow" id="cover-eyebrow-txt">Bersama dalam ikatan suci</p>
+
+  <svg class="floral-divider" viewBox="0 0 260 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="20" x2="88" y2="20" stroke="#C9A06A" stroke-width=".8" opacity=".6"/>
+    <circle cx="100" cy="20" r="4" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="130" cy="20" r="7" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="130" cy="20" r="3" fill="#C9A06A" opacity=".5"/>
+    <circle cx="160" cy="20" r="4" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <line x1="172" y1="20" x2="260" y2="20" stroke="#C9A06A" stroke-width=".8" opacity=".6"/>
+  </svg>
+
+  <h1 class="cover-names">
+    <span id="bride-short">Ariana</span>
+    <span class="cover-amp">&amp;</span>
+    <span id="groom-short">Rafli</span>
+  </h1>
+
+  <svg class="floral-divider" viewBox="0 0 260 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="20" x2="88" y2="20" stroke="#C9A06A" stroke-width=".8" opacity=".6"/>
+    <circle cx="100" cy="20" r="4" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="130" cy="20" r="7" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="130" cy="20" r="3" fill="#C9A06A" opacity=".5"/>
+    <circle cx="160" cy="20" r="4" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <line x1="172" y1="20" x2="260" y2="20" stroke="#C9A06A" stroke-width=".8" opacity=".6"/>
+  </svg>
+
+  <p class="cover-date" id="cover-date-txt">Sabtu, 14 Februari 2027</p>
+  <button class="btn-envelope" id="openInvite">
+    <i class="fa-regular fa-envelope"></i> <span id="btn-open-txt">Buka Undangan</span>
+  </button>
+</section>
+
+<!-- ══ COUPLE ══ -->
+<section id="couple">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" id="couple-eyebrow">Mempelai</p>
+      <h2 class="section-title" id="couple-title">Dua Jiwa, Satu Ikatan</h2>
+      <div class="thin-rule"></div>
+      <p class="lead-copy" id="couple-desc">Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-5" data-aos="fade-right" data-aos-delay="100">
+        <div class="couple-card h-100">
+          <img id="bride-photo" src="wanita.jpg" class="couple-photo" alt="Bride">
+          <div class="couple-name" id="bride-name">Ariana Putri</div>
+          <div class="couple-fullname" id="bride-fullname">Ariana Putri Wijaya</div>
+          <p class="couple-parents" id="bride-parents">Putri pertama dari<br>Bapak H. Wijaya &amp; Ibu Hj. Sari Dewi</p>
+        </div>
+      </div>
+      <div class="col-md-5" data-aos="fade-left" data-aos-delay="200">
+        <div class="couple-card h-100">
+          <img id="groom-photo" src="pria.jpg" class="couple-photo" alt="Groom">
+          <div class="couple-name" id="groom-name">Rafli Pratama</div>
+          <div class="couple-fullname" id="groom-fullname">Muhammad Rafli Pratama</div>
+          <p class="couple-parents" id="groom-parents">Putra pertama dari<br>Bapak H. Pratama &amp; Ibu Hj. Lestari</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EVENT ══ -->
+<section id="event">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" id="event-eyebrow">Rangkaian Acara</p>
+      <h2 class="section-title" id="event-title">Hari Istimewa Kami</h2>
+      <div class="thin-rule"></div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="event-card h-100">
+          <div class="event-card-icon"><i class="fa-solid fa-mosque"></i></div>
+          <div class="event-card-type" id="akad-type">Akad Nikah</div>
+          <div class="event-card-title" id="akad-title">Sacred Vow</div>
+          <div class="event-detail"><i class="fa-regular fa-calendar"></i><span id="akad-date">Sabtu, 14 Februari 2027</span></div>
+          <div class="event-detail"><i class="fa-regular fa-clock"></i><span id="akad-time">08.00 – 10.00 WIB</span></div>
+          <div class="event-detail"><i class="fa-solid fa-location-dot"></i><span id="akad-place">Masjid Al-Ikhlas, Jl. Kebon Jeruk No. 12, Jakarta Barat</span></div>
+        </div>
+      </div>
+      <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
+        <div class="event-card h-100">
+          <div class="event-card-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+          <div class="event-card-type" id="resepsi-type">Resepsi</div>
+          <div class="event-card-title" id="resepsi-title">Celebration</div>
+          <div class="event-detail"><i class="fa-regular fa-calendar"></i><span id="resepsi-date">Sabtu, 14 Februari 2027</span></div>
+          <div class="event-detail"><i class="fa-regular fa-clock"></i><span id="resepsi-time">11.00 – 15.00 WIB</span></div>
+          <div class="event-detail"><i class="fa-solid fa-location-dot"></i><span id="resepsi-place">The Heritage Ballroom, Jl. Sudirman Kav. 45, Jakarta Pusat</span></div>
+          <div style="margin-top:1.5rem;">
+            <a id="maps-link" href="https://maps.app.goo.gl/BZBfMu6djpurbvQT9" target="_blank" rel="noopener noreferrer"
+               class="btn-copy" style="text-decoration:none;display:inline-block;background-color:var(--gold);color:white;border:none;padding:10px 20px;">
+              <i class="fa-solid fa-map-location-dot me-1"></i> Buka Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COUNTDOWN ══ -->
+<section id="countdown">
+  <div class="container text-center">
+    <p class="section-eyebrow" style="color:var(--rose);" data-aos="fade-up" id="cd-eyebrow">Menghitung Hari</p>
+    <h2 class="countdown-title" data-aos="fade-up" data-aos-delay="80" id="cd-title">Segera Hadir</h2>
+    <div class="countdown-grid">
+      <div class="cd-unit"><div class="cd-number" id="cd-days">--</div><div class="cd-label" id="cd-label-days">Hari</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-number" id="cd-hours">--</div><div class="cd-label" id="cd-label-hours">Jam</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-number" id="cd-minutes">--</div><div class="cd-label" id="cd-label-minutes">Menit</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-number" id="cd-seconds">--</div><div class="cd-label" id="cd-label-seconds">Detik</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOVE STORY ══ -->
+<section id="lovestory">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" id="ls-eyebrow">Our Journey</p>
+      <h2 class="section-title" id="ls-title">Kisah Cinta Kami</h2>
+      <div class="thin-rule"></div>
+      <p class="lead-copy" id="ls-desc">Setiap pertemuan adalah takdir. Setiap kenangan adalah anugerah.</p>
+    </div>
+    <div class="ls-photo-wrap" data-aos="fade-up" data-aos-delay="80">
+      <img id="ls-hero-photo" src="foto1.jpg" alt="Couple" class="ls-hero-photo" />
+      <div class="ls-photo-caption"><span id="ls-caption">"Sejak hari itu, aku tahu kamu adalah rumahku." 🤍</span></div>
+    </div>
+    <div class="ls-timeline" id="ls-timeline" style="margin-top:4rem;"></div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section id="gallery">
+  <div class="gallery-hero" data-aos="fade-up">
+    <img id="gallery-hero-img" src="foto2.jpg" alt="Couple" class="gallery-hero-img" />
+    <div class="gallery-hero-overlay">
+      <p class="section-eyebrow" id="gallery-eyebrow">Galeri</p>
+      <h2 class="section-title" id="gallery-title">Momen Bersama</h2>
+      <div class="thin-rule"></div>
+    </div>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+  <div class="gallery-ticker-wrapper">
+    <div class="gallery-ticker-track" id="gallery-ticker"></div>
+  </div>
+</section>
+
+<!-- ══ RSVP ══ -->
+<section id="rsvp">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" id="rsvp-eyebrow">Ucapan &amp; Kehadiran</p>
+      <h2 class="section-title" id="rsvp-title">Kirim Doamu</h2>
+      <div class="thin-rule"></div>
+      <p class="lead-copy" id="rsvp-desc">Kehadiran dan doa restu Anda adalah kebahagiaan terbesar bagi kami.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="rsvp-form">
+          <div class="mb-3"><input type="text" class="form-control" id="wish-name" placeholder="Nama Anda" /></div>
+          <div class="mb-3">
+            <select class="form-select" id="wish-attend">
+              <option value="" disabled selected>Konfirmasi Kehadiran</option>
+              <option value="hadir">✓ Hadir</option>
+              <option value="tidak">✗ Tidak dapat hadir</option>
+              <option value="mungkin">? Mungkin hadir</option>
+            </select>
+          </div>
+          <div class="mb-3"><textarea class="form-control" id="wish-msg" rows="4" placeholder="Tulis ucapan dan doa terbaikmu…"></textarea></div>
+          <button class="btn-submit" id="submit-wish"><i class="fa-solid fa-paper-plane me-2"></i>Kirim Ucapan</button>
+        </div>
+        <div id="wish-list"><div class="wish-loading"><i class="fa-solid fa-spinner fa-spin me-2"></i>Memuat ucapan…</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GIFT ══ -->
+<section id="gift">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" id="gift-eyebrow">Hadiah Digital</p>
+      <h2 class="section-title" id="gift-title">Wedding Gift</h2>
+      <div class="thin-rule"></div>
+      <p class="lead-copy" id="gift-desc" style="font-size:.97rem;">Bagi yang ingin memberikan hadiah, Anda dapat mentransfer melalui rekening berikut.</p>
+    </div>
+    <div class="row g-4 justify-content-center" id="gift-accounts-container"></div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer data-aos="fade-up">
+  <svg class="floral-divider" style="opacity:.35;" viewBox="0 0 260 40" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="20" x2="88" y2="20" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="100" cy="20" r="4" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="130" cy="20" r="7" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <circle cx="130" cy="20" r="3" fill="#C9A06A" opacity=".5"/>
+    <circle cx="160" cy="20" r="4" fill="none" stroke="#C9A06A" stroke-width=".8"/>
+    <line x1="172" y1="20" x2="260" y2="20" stroke="#C9A06A" stroke-width=".8"/>
+  </svg>
+  <div class="footer-names" id="footer-names">Ariana &amp; Rafli</div>
+  <p class="footer-verse" id="footer-verse">
+    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."<br>
+    <em>— QS. Ar-Rum: 21</em>
+  </p>
+  <p style="margin-top:2rem;font-size:.72rem;letter-spacing:.18em;color:rgba(250,246,240,.3);text-transform:uppercase;" id="footer-date-txt">Sabtu · 14 Februari 2027</p>
+</footer>
+
+<button class="music-btn" id="music-btn" title="Putar Musik"><i class="fa-solid fa-music"></i></button>
+<audio id="bg-music" loop><source id="bg-music-src" src="musik.mp3" type="audio/mpeg"/></audio>
+
+<!-- ══ ADMIN PANEL ══ -->
+<div id="admin-overlay">
+  <div id="admin-modal">
+    <!-- LOGIN -->
+    <div id="admin-login-panel">
+      <div class="admin-header">
+        <h2>⚙️ Panel Admin</h2>
+        <button class="admin-close" onclick="closeAdmin()">✕</button>
+      </div>
+      <div id="admin-login" style="padding:2.5rem 2rem;text-align:center;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:#C9A06A;margin-bottom:.4rem;">Masukkan Password</p>
+        <p style="font-size:.78rem;color:#9e7070;letter-spacing:.1em;margin-bottom:1.5rem;">Akses pengelolaan konten undangan</p>
+        <input type="password" id="admin-pass" class="admin-input" placeholder="Password admin" style="max-width:300px;margin:0 auto .8rem;display:block;" />
+        <p id="admin-err" style="color:#c0392b;font-size:.78rem;margin-bottom:.8rem;display:none;">❌ Password salah!</p>
+        <button onclick="adminLogin()" class="btn-admin-save" style="min-width:140px;">Masuk</button>
+      </div>
+    </div>
+
+    <!-- MAIN PANEL (hidden until logged in) -->
+    <div id="admin-main" style="display:none;">
+      <div class="admin-header">
+        <h2>⚙️ Panel Admin — Kelola Undangan</h2>
+        <button class="admin-close" onclick="closeAdmin()">✕</button>
+      </div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('tab-warna')">🎨 Warna</button>
+        <button class="admin-tab" onclick="switchTab('tab-cover')">🏠 Cover</button>
+        <button class="admin-tab" onclick="switchTab('tab-mempelai')">💑 Mempelai</button>
+        <button class="admin-tab" onclick="switchTab('tab-acara')">📅 Acara</button>
+        <button class="admin-tab" onclick="switchTab('tab-lovestory')">💕 Love Story</button>
+        <button class="admin-tab" onclick="switchTab('tab-galeri')">🖼️ Galeri</button>
+        <button class="admin-tab" onclick="switchTab('tab-hadiah')">🎁 Hadiah</button>
+        <button class="admin-tab" onclick="switchTab('tab-footer')">📝 Footer</button>
+        <button class="admin-tab" onclick="switchTab('tab-media')">🎵 Media</button>
+        <button class="admin-tab" onclick="switchTab('tab-ucapan')">💌 Ucapan</button>
+      </div>
+
+      <!-- ── TAB WARNA ── -->
+      <div id="tab-warna" class="admin-pane active">
+        <p class="admin-section-title">Palet Warna Undangan</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Warna Ivory (latar)</label>
+            <div class="color-row">
+              <input type="color" id="c-ivory" value="#FAF6F0" oninput="syncColorInput(this,'c-ivory-txt')">
+              <input type="text" class="admin-input" id="c-ivory-txt" value="#FAF6F0" oninput="syncColorPicker(this,'c-ivory')">
+            </div>
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Warna Rose</label>
+            <div class="color-row">
+              <input type="color" id="c-rose" value="#C9A0A0" oninput="syncColorInput(this,'c-rose-txt')">
+              <input type="text" class="admin-input" id="c-rose-txt" value="#C9A0A0" oninput="syncColorPicker(this,'c-rose')">
+            </div>
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Warna Wine (aksen utama)</label>
+            <div class="color-row">
+              <input type="color" id="c-wine" value="#5C2D2D" oninput="syncColorInput(this,'c-wine-txt')">
+              <input type="text" class="admin-input" id="c-wine-txt" value="#5C2D2D" oninput="syncColorPicker(this,'c-wine')">
+            </div>
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Warna Gold</label>
+            <div class="color-row">
+              <input type="color" id="c-gold" value="#C9A06A" oninput="syncColorInput(this,'c-gold-txt')">
+              <input type="text" class="admin-input" id="c-gold-txt" value="#C9A06A" oninput="syncColorPicker(this,'c-gold')">
+            </div>
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Warna Sage</label>
+            <div class="color-row">
+              <input type="color" id="c-sage" value="#A8B5A2" oninput="syncColorInput(this,'c-sage-txt')">
+              <input type="text" class="admin-input" id="c-sage-txt" value="#A8B5A2" oninput="syncColorPicker(this,'c-sage')">
+            </div>
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Warna Dark</label>
+            <div class="color-row">
+              <input type="color" id="c-dark" value="#2E1A1A" oninput="syncColorInput(this,'c-dark-txt')">
+              <input type="text" class="admin-input" id="c-dark-txt" value="#2E1A1A" oninput="syncColorPicker(this,'c-dark')">
+            </div>
+          </div>
+        </div>
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveColors()">Simpan Warna</button>
+          <span class="admin-toast" id="toast-warna">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB COVER ── -->
+      <div id="tab-cover" class="admin-pane">
+        <p class="admin-section-title">Halaman Cover / Pembuka</p>
+        <div class="admin-group">
+          <label class="admin-label">Teks Eyebrow (atas nama)</label>
+          <input type="text" class="admin-input" id="a-cover-eyebrow" value="Bersama dalam ikatan suci">
+        </div>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Nama Singkat Mempelai Wanita</label>
+            <input type="text" class="admin-input" id="a-bride-short" value="Ariana">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Nama Singkat Mempelai Pria</label>
+            <input type="text" class="admin-input" id="a-groom-short" value="Rafli">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Tanggal di Cover</label>
+          <input type="text" class="admin-input" id="a-cover-date" value="Sabtu, 14 Februari 2027">
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Teks Tombol Buka Undangan</label>
+          <input type="text" class="admin-input" id="a-btn-open" value="Buka Undangan">
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">URL Video Cover (nama file / URL)</label>
+          <input type="text" class="admin-input" id="a-video-url" value="video.mp4">
+          <p class="admin-hint">Ganti dengan nama file video yang ada di folder yang sama, atau URL penuh video (mp4)</p>
+          <div class="upload-row">
+            <input type="file" accept="video/*" id="file-video-url" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-video-url','cover-video','status-video-url')">
+            <label for="file-video-url" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload dari Galeri / Drive</label>
+            <span class="upload-status" id="status-video-url"></span>
+          </div>
+        </div>
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveCover()">Simpan Cover</button>
+          <span class="admin-toast" id="toast-cover">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB MEMPELAI ── -->
+      <div id="tab-mempelai" class="admin-pane">
+        <p class="admin-section-title">Teks Bagian Mempelai</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Eyebrow</label>
+            <input type="text" class="admin-input" id="a-couple-eyebrow" value="Mempelai">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul</label>
+            <input type="text" class="admin-input" id="a-couple-title" value="Dua Jiwa, Satu Ikatan">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Deskripsi</label>
+          <textarea class="admin-textarea" id="a-couple-desc">Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.</textarea>
+        </div>
+
+        <p class="admin-section-title" style="margin-top:1rem;">Data Mempelai Wanita</p>
+        <div class="admin-group">
+          <label class="admin-label">Foto (URL / nama file)</label>
+          <input type="text" class="admin-input" id="a-bride-photo" value="wanita.jpg">
+          <p class="admin-hint">Nama file foto yang ada di folder sama, atau URL penuh gambar</p>
+          <div class="upload-row">
+            <input type="file" accept="image/*" id="file-bride-photo" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-bride-photo','photos','status-bride-photo')">
+            <label for="file-bride-photo" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload dari Galeri / Drive</label>
+            <span class="upload-status" id="status-bride-photo"></span>
+          </div>
+        </div>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Nama Panggilan</label>
+            <input type="text" class="admin-input" id="a-bride-name" value="Ariana Putri">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Nama Lengkap</label>
+            <input type="text" class="admin-input" id="a-bride-fullname" value="Ariana Putri Wijaya">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Info Orang Tua</label>
+          <textarea class="admin-textarea" style="min-height:54px;" id="a-bride-parents">Putri pertama dari
+Bapak H. Wijaya & Ibu Hj. Sari Dewi</textarea>
+        </div>
+
+        <p class="admin-section-title">Data Mempelai Pria</p>
+        <div class="admin-group">
+          <label class="admin-label">Foto (URL / nama file)</label>
+          <input type="text" class="admin-input" id="a-groom-photo" value="pria.jpg">
+          <div class="upload-row">
+            <input type="file" accept="image/*" id="file-groom-photo" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-groom-photo','photos','status-groom-photo')">
+            <label for="file-groom-photo" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload dari Galeri / Drive</label>
+            <span class="upload-status" id="status-groom-photo"></span>
+          </div>
+        </div>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Nama Panggilan</label>
+            <input type="text" class="admin-input" id="a-groom-name" value="Rafli Pratama">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Nama Lengkap</label>
+            <input type="text" class="admin-input" id="a-groom-fullname" value="Muhammad Rafli Pratama">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Info Orang Tua</label>
+          <textarea class="admin-textarea" style="min-height:54px;" id="a-groom-parents">Putra pertama dari
+Bapak H. Pratama & Ibu Hj. Lestari</textarea>
+        </div>
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveMempelai()">Simpan Mempelai</button>
+          <span class="admin-toast" id="toast-mempelai">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB ACARA ── -->
+      <div id="tab-acara" class="admin-pane">
+        <p class="admin-section-title">Header Bagian Acara</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Eyebrow</label>
+            <input type="text" class="admin-input" id="a-event-eyebrow" value="Rangkaian Acara">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul</label>
+            <input type="text" class="admin-input" id="a-event-title" value="Hari Istimewa Kami">
+          </div>
+        </div>
+
+        <p class="admin-section-title">Akad Nikah</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Label Tipe</label>
+            <input type="text" class="admin-input" id="a-akad-type" value="Akad Nikah">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul Kartu</label>
+            <input type="text" class="admin-input" id="a-akad-title" value="Sacred Vow">
+          </div>
+        </div>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Tanggal</label>
+            <input type="text" class="admin-input" id="a-akad-date" value="Sabtu, 14 Februari 2027">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Jam</label>
+            <input type="text" class="admin-input" id="a-akad-time" value="08.00 – 10.00 WIB">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Tempat</label>
+          <input type="text" class="admin-input" id="a-akad-place" value="Masjid Al-Ikhlas, Jl. Kebon Jeruk No. 12, Jakarta Barat">
+        </div>
+
+        <p class="admin-section-title">Resepsi</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Label Tipe</label>
+            <input type="text" class="admin-input" id="a-resepsi-type" value="Resepsi">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul Kartu</label>
+            <input type="text" class="admin-input" id="a-resepsi-title" value="Celebration">
+          </div>
+        </div>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Tanggal</label>
+            <input type="text" class="admin-input" id="a-resepsi-date" value="Sabtu, 14 Februari 2027">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Jam</label>
+            <input type="text" class="admin-input" id="a-resepsi-time" value="11.00 – 15.00 WIB">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Tempat</label>
+          <input type="text" class="admin-input" id="a-resepsi-place" value="The Heritage Ballroom, Jl. Sudirman Kav. 45, Jakarta Pusat">
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">URL Google Maps</label>
+          <input type="text" class="admin-input" id="a-maps-url" value="https://maps.app.goo.gl/BZBfMu6djpurbvQT9">
+        </div>
+
+        <p class="admin-section-title">Countdown</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Tanggal Target Countdown</label>
+            <input type="datetime-local" class="admin-input" id="a-countdown-date" value="2027-02-14T08:00">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul Countdown</label>
+            <input type="text" class="admin-input" id="a-cd-title" value="Segera Hadir">
+          </div>
+        </div>
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveAcara()">Simpan Acara</button>
+          <span class="admin-toast" id="toast-acara">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB LOVE STORY ── -->
+      <div id="tab-lovestory" class="admin-pane">
+        <p class="admin-section-title">Header Love Story</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Eyebrow</label>
+            <input type="text" class="admin-input" id="a-ls-eyebrow" value="Our Journey">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul</label>
+            <input type="text" class="admin-input" id="a-ls-title" value="Kisah Cinta Kami">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Deskripsi</label>
+          <input type="text" class="admin-input" id="a-ls-desc" value="Setiap pertemuan adalah takdir. Setiap kenangan adalah anugerah.">
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Foto Hero (URL / nama file)</label>
+          <input type="text" class="admin-input" id="a-ls-photo" value="foto1.jpg">
+          <div class="upload-row">
+            <input type="file" accept="image/*" id="file-ls-photo" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-ls-photo','photos','status-ls-photo')">
+            <label for="file-ls-photo" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload dari Galeri / Drive</label>
+            <span class="upload-status" id="status-ls-photo"></span>
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Caption Foto Hero</label>
+          <input type="text" class="admin-input" id="a-ls-caption" value='"Sejak hari itu, aku tahu kamu adalah rumahku." 🤍'>
+        </div>
+
+        <p class="admin-section-title">Timeline / Momen (bisa tambah / hapus)</p>
+        <div id="a-story-items"></div>
+        <button class="btn-admin-outline" onclick="addStoryItem()" style="margin-top:.5rem;">+ Tambah Momen</button>
+
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveLoveStory()">Simpan Love Story</button>
+          <span class="admin-toast" id="toast-ls">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB GALERI ── -->
+      <div id="tab-galeri" class="admin-pane">
+        <p class="admin-section-title">Header Galeri</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Eyebrow</label>
+            <input type="text" class="admin-input" id="a-gallery-eyebrow" value="Galeri">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul</label>
+            <input type="text" class="admin-input" id="a-gallery-title" value="Momen Bersama">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Foto Hero Galeri (URL / nama file)</label>
+          <input type="text" class="admin-input" id="a-gallery-hero" value="foto2.jpg">
+          <div class="upload-row">
+            <input type="file" accept="image/*" id="file-gallery-hero" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-gallery-hero','photos','status-gallery-hero')">
+            <label for="file-gallery-hero" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload dari Galeri / Drive</label>
+            <span class="upload-status" id="status-gallery-hero"></span>
+          </div>
+        </div>
+
+        <p class="admin-section-title">Foto Grid (3 foto tengah)</p>
+        <div class="admin-row-3">
+          <div class="admin-group"><label class="admin-label">Grid 1</label><input type="text" class="admin-input" id="a-grid-1" value="foto3.jpg">
+            <div class="upload-row">
+              <input type="file" accept="image/*" id="file-grid-1" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-grid-1','photos','status-grid-1')">
+              <label for="file-grid-1" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</label>
+              <span class="upload-status" id="status-grid-1"></span>
+            </div>
+          </div>
+          <div class="admin-group"><label class="admin-label">Grid 2</label><input type="text" class="admin-input" id="a-grid-2" value="foto4.jpg">
+            <div class="upload-row">
+              <input type="file" accept="image/*" id="file-grid-2" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-grid-2','photos','status-grid-2')">
+              <label for="file-grid-2" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</label>
+              <span class="upload-status" id="status-grid-2"></span>
+            </div>
+          </div>
+          <div class="admin-group"><label class="admin-label">Grid 3</label><input type="text" class="admin-input" id="a-grid-3" value="foto5.jpg">
+            <div class="upload-row">
+              <input type="file" accept="image/*" id="file-grid-3" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-grid-3','photos','status-grid-3')">
+              <label for="file-grid-3" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</label>
+              <span class="upload-status" id="status-grid-3"></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="admin-section-title">Foto Ticker (bisa tambah / hapus)</p>
+        <div id="a-ticker-items"></div>
+        <button class="btn-admin-outline" onclick="addTickerItem()" style="margin-top:.5rem;">+ Tambah Foto Ticker</button>
+
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveGaleri()">Simpan Galeri</button>
+          <span class="admin-toast" id="toast-galeri">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB HADIAH ── -->
+      <div id="tab-hadiah" class="admin-pane">
+        <p class="admin-section-title">Header Hadiah</p>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Eyebrow</label>
+            <input type="text" class="admin-input" id="a-gift-eyebrow" value="Hadiah Digital">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Judul</label>
+            <input type="text" class="admin-input" id="a-gift-title" value="Wedding Gift">
+          </div>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Deskripsi</label>
+          <textarea class="admin-textarea" id="a-gift-desc">Bagi yang ingin memberikan hadiah, Anda dapat mentransfer melalui rekening berikut.</textarea>
+        </div>
+
+        <p class="admin-section-title">Rekening (bisa tambah / hapus)</p>
+        <div id="a-gift-accounts"></div>
+        <button class="btn-admin-outline" onclick="addGiftAccount()" style="margin-top:.5rem;">+ Tambah Rekening</button>
+
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveHadiah()">Simpan Hadiah</button>
+          <span class="admin-toast" id="toast-hadiah">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB FOOTER ── -->
+      <div id="tab-footer" class="admin-pane">
+        <p class="admin-section-title">Bagian Footer / Penutup</p>
+        <div class="admin-group">
+          <label class="admin-label">Nama di Footer</label>
+          <input type="text" class="admin-input" id="a-footer-names" value="Ariana & Rafli">
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Ayat / Verse</label>
+          <textarea class="admin-textarea" id="a-footer-verse">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."
+— QS. Ar-Rum: 21</textarea>
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Tanggal di Footer</label>
+          <input type="text" class="admin-input" id="a-footer-date" value="Sabtu · 14 Februari 2027">
+        </div>
+        <div class="admin-group">
+          <label class="admin-label">Judul Tab Halaman Browser</label>
+          <input type="text" class="admin-input" id="a-page-title" value="Undangan Pernikahan – Ariana & Rafli">
+        </div>
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveFooter()">Simpan Footer</button>
+          <span class="admin-toast" id="toast-footer">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB MEDIA ── -->
+      <div id="tab-media" class="admin-pane">
+        <p class="admin-section-title">Musik Latar Belakang</p>
+        <div class="admin-group">
+          <label class="admin-label">URL / Nama File Musik (mp3)</label>
+          <input type="text" class="admin-input" id="a-music-url" value="musik.mp3">
+          <p class="admin-hint">Ganti dengan nama file .mp3 di folder yang sama, atau URL penuh audio mp3</p>
+          <div class="upload-row">
+            <input type="file" accept="audio/*" id="file-music-url" class="admin-file-input" onchange="uploadFileAndSetInput(this.files[0],'a-music-url','audio','status-music-url')">
+            <label for="file-music-url" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload dari Galeri / Drive</label>
+            <span class="upload-status" id="status-music-url"></span>
+          </div>
+        </div>
+
+        <p class="admin-section-title">Password Admin</p>
+        <div class="admin-group">
+          <label class="admin-label">Password Admin Saat Ini</label>
+          <input type="password" class="admin-input" id="a-admin-pass-current" placeholder="Password lama">
+        </div>
+        <div class="admin-row">
+          <div class="admin-group">
+            <label class="admin-label">Password Baru</label>
+            <input type="password" class="admin-input" id="a-admin-pass-new" placeholder="Password baru">
+          </div>
+          <div class="admin-group">
+            <label class="admin-label">Konfirmasi Password Baru</label>
+            <input type="password" class="admin-input" id="a-admin-pass-confirm" placeholder="Ulangi password baru">
+          </div>
+        </div>
+        <div class="admin-save-row">
+          <button class="btn-admin-save" onclick="saveMedia()">Simpan Media</button>
+          <button class="btn-admin-save" onclick="changePassword()" style="background:#A8B5A2;">Ganti Password</button>
+          <span class="admin-toast" id="toast-media">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- ── TAB UCAPAN ── -->
+      <div id="tab-ucapan" class="admin-pane">
+        <p class="admin-section-title">Kelola Ucapan Tamu</p>
+        <div id="admin-wish-list" style="max-height:400px;overflow-y:auto;"></div>
+        <div class="admin-save-row" style="margin-top:1rem;">
+          <button class="btn-admin-danger" onclick="resetWishes()">🗑️ Hapus Semua Ucapan</button>
+          <button class="btn-admin-outline" onclick="loadAdminWishes()">↺ Refresh</button>
+          <span class="admin-toast" id="toast-ucapan"></span>
+        </div>
+      </div>
+
+    </div><!-- end admin-main -->
+  </div><!-- end admin-modal -->
+</div>
+
+<!-- Trigger admin (invisible tap zone) -->
+<button id="admin-trigger" onclick="adminTap()" title="" style="position:fixed;bottom:1.5rem;left:1.5rem;z-index:998;width:40px;height:40px;background:transparent;border:none;cursor:pointer;opacity:0;"></button>
+
+<!-- ══ SCRIPTS ══ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════
+// FIREBASE INIT
+// ═══════════════════════════════════════════════
+const firebaseConfig = {
+  apiKey:            "AIzaSyCphv1zVnrzl3_wm-RgOFqXHqeJAW0aexM",
+  authDomain:        "undanganku-50710.firebaseapp.com",
+  databaseURL:       "https://undanganku-50710-default-rtdb.firebaseio.com",
+  projectId:         "undanganku-50710",
+  storageBucket:     "undanganku-50710.firebasestorage.app",
+  messagingSenderId: "301432959525",
+  appId:             "1:301432959525:web:67559457edc1e9bf1e05cc",
+  measurementId:     "G-DK55D403XN"
+};
+
+const WEDDING_ID = 'ariana-rafli';
+firebase.initializeApp(firebaseConfig);
+const db      = firebase.database();
+const wishRef = db.ref('wishes/' + WEDDING_ID);
+const cfgRef  = db.ref('config/' + WEDDING_ID);
+const storage = firebase.storage();
+
+if (typeof firebase.analytics === 'function') firebase.analytics();
+
+// ═══════════════════════════════════════════════
+// DEFAULTS
+// ═══════════════════════════════════════════════
+const DEFAULTS = {
+  colors: { ivory:'#FAF6F0', rose:'#C9A0A0', wine:'#5C2D2D', gold:'#C9A06A', sage:'#A8B5A2', dark:'#2E1A1A' },
+  cover: { eyebrow:'Bersama dalam ikatan suci', brideShort:'Ariana', groomShort:'Rafli', date:'Sabtu, 14 Februari 2027', btnOpen:'Buka Undangan', videoUrl:'video.mp4' },
+  couple: { eyebrow:'Mempelai', title:'Dua Jiwa, Satu Ikatan', desc:'Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.', bridePhoto:'wanita.jpg', brideName:'Ariana Putri', brideFullname:'Ariana Putri Wijaya', brideParents:'Putri pertama dari\nBapak H. Wijaya & Ibu Hj. Sari Dewi', groomPhoto:'pria.jpg', groomName:'Rafli Pratama', groomFullname:'Muhammad Rafli Pratama', groomParents:'Putra pertama dari\nBapak H. Pratama & Ibu Hj. Lestari' },
+  event: { eyebrow:'Rangkaian Acara', title:'Hari Istimewa Kami', akadType:'Akad Nikah', akadTitle:'Sacred Vow', akadDate:'Sabtu, 14 Februari 2027', akadTime:'08.00 – 10.00 WIB', akadPlace:'Masjid Al-Ikhlas, Jl. Kebon Jeruk No. 12, Jakarta Barat', resepsiType:'Resepsi', resepsiTitle:'Celebration', resepsiDate:'Sabtu, 14 Februari 2027', resepsiTime:'11.00 – 15.00 WIB', resepsiPlace:'The Heritage Ballroom, Jl. Sudirman Kav. 45, Jakarta Pusat', mapsUrl:'https://maps.app.goo.gl/BZBfMu6djpurbvQT9', countdownDate:'2027-02-14T08:00', cdTitle:'Segera Hadir' },
+  lovestory: { eyebrow:'Our Journey', title:'Kisah Cinta Kami', desc:'Setiap pertemuan adalah takdir. Setiap kenangan adalah anugerah.', heroPhoto:'foto1.jpg', caption:'"Sejak hari itu, aku tahu kamu adalah rumahku." 🤍', items:[ {icon:'☕',year:'Maret 2022',title:'Pertemuan Pertama',desc:'Takdir mempertemukan kami di sebuah kafe kecil yang hangat. Sebuah senyuman sederhana yang mengubah segalanya.'}, {icon:'🌻',year:'Juli 2022',title:'Jatuh Hati',desc:'Semakin banyak waktu bersama, semakin dalam rasa yang tumbuh. Tanpa disadari, kami sudah saling melengkapi.'}, {icon:'✈️',year:'Desember 2022',title:'Petualangan Berdua',desc:'Perjalanan pertama bersama ke Bali — momen di mana kami menyadari bahwa dunia terasa lebih indah bila dijalani bersama.'}, {icon:'💍',year:'Februari 2024',title:'Lamaran',desc:'Di bawah ribuan bintang, Rafli berlutut dan mengucapkan kata-kata yang selalu Ariana impikan.'}, {icon:'💒',year:'14 Februari 2027',title:'Hari Pernikahan',desc:'Hari di mana dua jiwa menjadi satu dalam ikatan suci yang diridhai Allah SWT.'} ] },
+  gallery: { eyebrow:'Galeri', title:'Momen Bersama', heroImg:'foto2.jpg', grid:['foto3.jpg','foto4.jpg','foto5.jpg'], ticker:['foto1.jpg','foto2.jpg','foto3.jpg','foto4.jpg','foto5.jpg'] },
+  gift: { eyebrow:'Hadiah Digital', title:'Wedding Gift', desc:'Bagi yang ingin memberikan hadiah, Anda dapat mentransfer melalui rekening berikut.', accounts:[ {bank:'Bank BCA',account:'1234 5678 90',name:'a/n Ariana Putri Wijaya'}, {bank:'Bank Mandiri',account:'0987 6543 21',name:'a/n Muhammad Rafli Pratama'} ] },
+  footer: { names:'Ariana & Rafli', verse:'"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."\n— QS. Ar-Rum: 21', date:'Sabtu · 14 Februari 2027', pageTitle:'Undangan Pernikahan – Ariana & Rafli' },
+  media: { musicUrl:'musik.mp3' },
+  adminPass: 'admin2027'
+};
+
+let CFG = JSON.parse(JSON.stringify(DEFAULTS));
+
+// ═══════════════════════════════════════════════
+// LOAD CONFIG FROM FIREBASE & APPLY
+// ═══════════════════════════════════════════════
+cfgRef.on('value', snap => {
+  const data = snap.val();
+  if (data) deepMerge(CFG, data);
+  applyAllConfig();
+  populateAdminFields();
+});
+
+function deepMerge(target, source) {
+  for (const k in source) {
+    if (source[k] && typeof source[k] === 'object' && !Array.isArray(source[k])) {
+      if (!target[k]) target[k] = {};
+      deepMerge(target[k], source[k]);
+    } else {
+      target[k] = source[k];
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// APPLY CONFIG TO DOM
+// ═══════════════════════════════════════════════
+function applyAllConfig() {
+  applyColors();
+  applyCover();
+  applyCouple();
+  applyEvent();
+  applyLoveStory();
+  applyGallery();
+  applyGift();
+  applyFooter();
+  applyMedia();
+}
+
+function applyColors() {
+  const c = CFG.colors;
+  const r = document.documentElement.style;
+  r.setProperty('--ivory', c.ivory);
+  r.setProperty('--rose',  c.rose);
+  r.setProperty('--wine',  c.wine);
+  r.setProperty('--gold',  c.gold);
+  r.setProperty('--sage',  c.sage);
+  r.setProperty('--dark',  c.dark);
+}
+
+function applyCover() {
+  const c = CFG.cover;
+  setText('cover-eyebrow-txt', c.eyebrow);
+  setText('bride-short', c.brideShort);
+  setText('groom-short', c.groomShort);
+  setText('cover-date-txt', c.date);
+  setText('btn-open-txt', c.btnOpen);
+  const vs = document.getElementById('cover-video-src');
+  if (vs && vs.src !== c.videoUrl) {
+    vs.src = c.videoUrl;
+    document.getElementById('cover-video').load();
+  }
+}
+
+function applyCouple() {
+  const c = CFG.couple;
+  setText('couple-eyebrow', c.eyebrow);
+  setText('couple-title', c.title);
+  setText('couple-desc', c.desc);
+  setSrc('bride-photo', c.bridePhoto);
+  setText('bride-name', c.brideName);
+  setText('bride-fullname', c.brideFullname);
+  setHTML('bride-parents', (c.brideParents||'').replace(/\n/g,'<br>'));
+  setSrc('groom-photo', c.groomPhoto);
+  setText('groom-name', c.groomName);
+  setText('groom-fullname', c.groomFullname);
+  setHTML('groom-parents', (c.groomParents||'').replace(/\n/g,'<br>'));
+}
+
+function applyEvent() {
+  const c = CFG.event;
+  setText('event-eyebrow', c.eyebrow);
+  setText('event-title', c.title);
+  setText('akad-type', c.akadType);
+  setText('akad-title', c.akadTitle);
+  setText('akad-date', c.akadDate);
+  setText('akad-time', c.akadTime);
+  setText('akad-place', c.akadPlace);
+  setText('resepsi-type', c.resepsiType);
+  setText('resepsi-title', c.resepsiTitle);
+  setText('resepsi-date', c.resepsiDate);
+  setText('resepsi-time', c.resepsiTime);
+  setText('resepsi-place', c.resepsiPlace);
+  const ml = document.getElementById('maps-link');
+  if (ml) ml.href = c.mapsUrl;
+  setText('cd-title', c.cdTitle);
+}
+
+function applyLoveStory() {
+  const c = CFG.lovestory;
+  setText('ls-eyebrow', c.eyebrow);
+  setText('ls-title', c.title);
+  setText('ls-desc', c.desc);
+  setSrc('ls-hero-photo', c.heroPhoto);
+  setText('ls-caption', c.caption);
+  // Render timeline
+  const tl = document.getElementById('ls-timeline');
+  if (tl) {
+    tl.innerHTML = (c.items||[]).map((it,i) => `
+      <div class="ls-item" data-aos="${i%2===0?'fade-right':'fade-left'}">
+        <div class="ls-card">
+          <span class="ls-icon">${escHtml(it.icon||'')}</span>
+          <div class="ls-year">${escHtml(it.year||'')}</div>
+          <div class="ls-title">${escHtml(it.title||'')}</div>
+          <p class="ls-desc">${escHtml(it.desc||'')}</p>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function applyGallery() {
+  const c = CFG.gallery;
+  setText('gallery-eyebrow', c.eyebrow);
+  setText('gallery-title', c.title);
+  setSrc('gallery-hero-img', c.heroImg);
+  // Grid
+  const grid = document.getElementById('gallery-grid');
+  if (grid) {
+    grid.innerHTML = (c.grid||[]).map(src => `<div class="gallery-grid-item"><img src="${escHtml(src)}" alt="Gallery" loading="lazy"></div>`).join('');
+  }
+  // Ticker
+  const ticker = document.getElementById('gallery-ticker');
+  if (ticker) {
+    const imgs = c.ticker||[];
+    const all = [...imgs, ...imgs]; // duplicate for loop
+    ticker.innerHTML = all.map(src => `<div class="ticker-item"><img src="${escHtml(src)}" alt="Gallery" loading="lazy"></div>`).join('');
+  }
+}
+
+function applyGift() {
+  const c = CFG.gift;
+  setText('gift-eyebrow', c.eyebrow);
+  setText('gift-title', c.title);
+  setText('gift-desc', c.desc);
+  const cont = document.getElementById('gift-accounts-container');
+  if (cont) {
+    cont.innerHTML = (c.accounts||[]).map((acc, i) => `
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="gift-box">
+          <div class="gift-icon"><i class="fa-solid fa-building-columns"></i></div>
+          <div class="gift-bank">${escHtml(acc.bank)}</div>
+          <div class="gift-account" id="acc-${i}">${escHtml(acc.account)}</div>
+          <div class="gift-name">${escHtml(acc.name)}</div>
+          <button class="btn-copy" onclick="copyText('acc-${i}', this)"><i class="fa-regular fa-copy me-1"></i> Salin</button>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function applyFooter() {
+  const c = CFG.footer;
+  setText('footer-names', c.names);
+  setHTML('footer-verse', (c.verse||'').replace(/\n/g,'<br>'));
+  setText('footer-date-txt', c.date);
+  document.title = c.pageTitle||'Undangan Pernikahan';
+  const pt = document.getElementById('page-title');
+  if (pt) pt.textContent = c.pageTitle||'';
+}
+
+function applyMedia() {
+  const src = document.getElementById('bg-music-src');
+  if (src && src.src !== CFG.media.musicUrl) {
+    src.src = CFG.media.musicUrl;
+    document.getElementById('bg-music').load();
+  }
+}
+
+// ── Helper ──
+function setText(id, val) { const el=document.getElementById(id); if(el) el.textContent = val||''; }
+function setHTML(id, val) { const el=document.getElementById(id); if(el) el.innerHTML = val||''; }
+function setSrc(id, val)  { const el=document.getElementById(id); if(el) el.src = val||''; }
+function escHtml(str) { return String(str||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// ═══════════════════════════════════════════════
+// UPLOAD FROM GALLERY / DRIVE (Firebase Storage)
+// ═══════════════════════════════════════════════
+// Lets admin pick a file straight from their phone's photo gallery, files app,
+// or a cloud provider like Google Drive (the browser's native file picker
+// already offers those sources) — file is uploaded to Firebase Storage and
+// the resulting public URL is written into the matching text input.
+// ═══════════════════════════════════════════════
+// FUNGSI UPLOAD + AUTO SAVE OTOMATIS
+// ═══════════════════════════════════════════════
+function uploadFileAndSetInput(file, targetInputId, folder, statusElId){
+  if(!file) return;
+  const statusEl = statusElId ? document.getElementById(statusElId) : null;
+  const setStatus = (txt, isError) => {
+    if(!statusEl) return;
+    statusEl.textContent = txt;
+    statusEl.classList.toggle('error', !!isError);
+  };
+  const maxMB = folder==='cover-video' ? 60 : (folder==='audio' ? 25 : 15);
+  if(file.size > maxMB*1024*1024){
+    setStatus(`❌ File terlalu besar (maks ${maxMB}MB)`, true);
+    return;
+  }
+  const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+  const path = `weddings/${WEDDING_ID}/${folder}/${Date.now()}_${safeName}`;
+  const ref  = storage.ref().child(path);
+  
+  setStatus('Mengupload… 0%', false);
+  const task = ref.put(file);
+  
+  task.on('state_changed',
+    snap => {
+      const pct = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+      setStatus(`Mengupload… ${pct}%`, false);
+    },
+    err => {
+      console.error('Upload error:', err);
+      setStatus('❌ Gagal upload: ' + (err.message||'cek koneksi/izin Storage'), true);
+    },
+    () => {
+      task.snapshot.ref.getDownloadURL().then(url => {
+        const inp = document.getElementById(targetInputId);
+        if(inp) inp.value = url;
+        setStatus('✓ Upload berhasil & tersimpan!', false);
+        
+        // Menghapus tulisan status setelah 3 detik
+        setTimeout(()=>{ if(statusEl) statusEl.textContent=''; }, 3000);
+
+        // >>> DI SINI PROSES AUTO-SAVE DIJALANKAN <<<
+        pemicuSimpanOtomatis(targetInputId);
+
+      }).catch(err => {
+        console.error(err);
+        setStatus('❌ Gagal mengambil URL file', true);
+      });
+    }
+  );
+}
+
+// Fungsi bantu untuk mendeteksi kolom mana yang diupload, lalu menyimpannya ke database
+function pemicuSimpanOtomatis(id) {
+  if (id === 'a-video-url') {
+    saveCover(); // Otomatis simpan video cover
+  } else if (id === 'a-bride-photo' || id === 'a-groom-photo') {
+    saveMempelai(); // Otomatis simpan foto mempelai wanita/pria
+  } else if (id === 'a-ls-photo') {
+    saveLoveStory(); // Otomatis simpan foto utama Love Story
+  } else if (id === 'a-gallery-hero' || id === 'a-grid-1' || id === 'a-grid-2' || id === 'a-grid-3' || id.startsWith('ti-src-')) {
+    saveGaleri(); // Otomatis simpan foto Galeri (Hero, Grid, maupun Ticker)
+  } else if (id === 'a-music-url') {
+    saveMedia(); // Otomatis simpan musik latar (audio)
+  }
+}
+
+// ═══════════════════════════════════════════════
+// COUNTDOWN
+// ═══════════════════════════════════════════════
+let countdownInterval = null;
+function startCountdown() {
+  if (countdownInterval) clearInterval(countdownInterval);
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const target = new Date(CFG.event.countdownDate||'2027-02-14T08:00:00');
+    const diff = target - new Date();
+    if(diff<=0){
+      ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='00'; });
+      return;
+    }
+    const el = id => document.getElementById(id);
+    if(el('cd-days'))    el('cd-days').textContent    = pad(Math.floor(diff/86400000));
+    if(el('cd-hours'))   el('cd-hours').textContent   = pad(Math.floor((diff%86400000)/3600000));
+    if(el('cd-minutes')) el('cd-minutes').textContent = pad(Math.floor((diff%3600000)/60000));
+    if(el('cd-seconds')) el('cd-seconds').textContent = pad(Math.floor((diff%60000)/1000));
+  }
+  tick(); countdownInterval = setInterval(tick,1000);
+}
+startCountdown();
+
+// ═══════════════════════════════════════════════
+// CONFETTI / EMOJIS
+// ═══════════════════════════════════════════════
+const weddingColors = ['#C9A06A','#C9A0A0','#FAF6F0','#A8B5A2','#5C2D2D','#f5d0d0','#e8c49a'];
+const openEmojis    = ['💍','💒','🌸','🌺','🌹','🕊️','✨','🎊','🎉','💐','🥂','❤️','💫','🌟'];
+const wishEmojis    = ['💌','❤️','🥰','🙏','💐','✨','🌸','💫','🎀','🌹','🫶','🤍','💞'];
+
+function spawnEmojis(emojis,count,ox,oy){
+  for(let i=0;i<count;i++){
+    const el=document.createElement('span');
+    el.classList.add('emoji-burst');
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText=`left:${ox}px;top:${oy}px;position:fixed;pointer-events:none;z-index:10000;`;
+    const angle=Math.random()*360,dist=120+Math.random()*220;
+    el.style.setProperty('--tx',(Math.cos(angle*Math.PI/180)*dist)+'px');
+    el.style.setProperty('--ty',(Math.sin(angle*Math.PI/180)*dist-80)+'px');
+    el.style.setProperty('--rot',((Math.random()-.5)*720)+'deg');
+    const delay=Math.random()*.4,dur=1.8+Math.random()*.8;
+    el.style.animationDelay=delay+'s'; el.style.animationDuration=dur+'s';
+    el.style.fontSize=(1.4+Math.random()*1.2)+'rem';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(delay+dur)*1000+100);
+  }
+}
+function shootCannons(){ confetti({particleCount:80,angle:60,spread:55,origin:{x:0,y:.65},colors:weddingColors,scalar:1.1}); confetti({particleCount:80,angle:120,spread:55,origin:{x:1,y:.65},colors:weddingColors,scalar:1.1}); }
+function rainConfetti(){ confetti({particleCount:160,spread:100,startVelocity:40,origin:{x:.5,y:.3},colors:weddingColors,ticks:200,gravity:.9,scalar:1.2}); }
+function starBurst(ox,oy){ confetti({particleCount:60,spread:80,origin:{x:ox/window.innerWidth,y:oy/window.innerHeight},colors:['#C9A06A','#FAF6F0','#f5d0d0','#fff'],shapes:['circle'],scalar:.6,ticks:180,gravity:.7}); }
+function repeatedSideBurst(){ let c=0; const iv=setInterval(()=>{ confetti({particleCount:30,angle:60,spread:40,origin:{x:0,y:.7},colors:weddingColors,scalar:.9}); confetti({particleCount:30,angle:120,spread:40,origin:{x:1,y:.7},colors:weddingColors,scalar:.9}); if(++c>=4) clearInterval(iv); },400); }
+
+// ═══════════════════════════════════════════════
+// OPEN INVITE
+// ═══════════════════════════════════════════════
+document.getElementById('openInvite').addEventListener('click', function(){
+  document.body.classList.remove('cover-locked');
+  const r=this.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+  spawnEmojis(openEmojis,22,cx,cy);
+  rainConfetti();
+  setTimeout(shootCannons,200);
+  setTimeout(repeatedSideBurst,400);
+  setTimeout(()=>starBurst(cx,cy),600);
+  setTimeout(()=>confetti({particleCount:200,spread:120,origin:{x:.5,y:.5},colors:weddingColors,scalar:1.3,ticks:250,gravity:1}),900);
+  const audio=document.getElementById('bg-music');
+  audio.play().then(()=>document.getElementById('music-btn').classList.add('playing')).catch(()=>{});
+  setTimeout(()=>document.getElementById('couple').scrollIntoView({behavior:'smooth'}),700);
+});
+
+// ═══════════════════════════════════════════════
+// MUSIC
+// ═══════════════════════════════════════════════
+const audio=document.getElementById('bg-music');
+const musicBtn=document.getElementById('music-btn');
+musicBtn.addEventListener('click',function(){
+  if(audio.paused){ audio.play().then(()=>musicBtn.classList.add('playing')).catch(()=>{}); }
+  else { audio.pause(); musicBtn.classList.remove('playing'); }
+});
+
+// ═══════════════════════════════════════════════
+// WISH / RSVP
+// ═══════════════════════════════════════════════
+function renderWishes(wishes){
+  const labels={hadir:'✓ Hadir',tidak:'✗ Tidak hadir',mungkin:'? Mungkin'};
+  const list=document.getElementById('wish-list');
+  if(!wishes||wishes.length===0){ list.innerHTML='<p class="wish-loading" style="color:var(--sage);">Belum ada ucapan. Jadilah yang pertama! 💌</p>'; return; }
+  list.innerHTML=wishes.map(w=>`
+    <div class="wish-card">
+      <span class="wish-card-name">${escHtml(w.name)}</span>
+      <span class="wish-card-attend">${labels[w.attend]||''}</span>
+      <p class="wish-card-msg">"${escHtml(w.msg)}"</p>
+      <p class="wish-card-time">${w.time?new Date(w.time).toLocaleString('id-ID'):''}</p>
+    </div>`).join('');
+}
+wishRef.on('value',snap=>{
+  const data=snap.val();
+  if(!data){renderWishes([]);return;}
+  renderWishes(Object.values(data).sort((a,b)=>(b.time||0)-(a.time||0)));
+});
+document.getElementById('submit-wish').addEventListener('click',function(){
+  const name=document.getElementById('wish-name').value.trim();
+  const attend=document.getElementById('wish-attend').value;
+  const msg=document.getElementById('wish-msg').value.trim();
+  if(!name||!attend||!msg){alert('Mohon lengkapi semua kolom.');return;}
+  const btn=this; btn.disabled=true; btn.innerHTML='<i class="fa-solid fa-spinner fa-spin me-2"></i>Mengirim…';
+  wishRef.push({name,attend,msg,time:Date.now()}).then(()=>{
+    document.getElementById('wish-name').value='';
+    document.getElementById('wish-attend').value='';
+    document.getElementById('wish-msg').value='';
+    btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-paper-plane me-2"></i>Kirim Ucapan';
+    const r=btn.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    spawnEmojis(wishEmojis,18,cx,cy);
+    confetti({particleCount:90,spread:70,origin:{x:cx/window.innerWidth,y:cy/window.innerHeight},colors:weddingColors,scalar:1.0,ticks:200,gravity:.8});
+    setTimeout(()=>{ confetti({particleCount:45,angle:70,spread:45,origin:{x:.1,y:.75},colors:weddingColors,scalar:.85}); confetti({particleCount:45,angle:110,spread:45,origin:{x:.9,y:.75},colors:weddingColors,scalar:.85}); },250);
+    setTimeout(()=>starBurst(window.innerWidth/2,cy),500);
+  }).catch(err=>{ console.error(err); alert('Gagal mengirim. Coba lagi! 🙏'); btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-paper-plane me-2"></i>Kirim Ucapan'; });
+});
+
+// ═══════════════════════════════════════════════
+// COPY ACCOUNT
+// ═══════════════════════════════════════════════
+function copyText(id,btn){
+  const text=document.getElementById(id)?.textContent?.replace(/\s/g,'')||'';
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig=btn.innerHTML; btn.innerHTML='<i class="fa-solid fa-check me-1"></i> Tersalin!';
+    setTimeout(()=>{ btn.innerHTML=orig; },2000);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// AOS
+// ═══════════════════════════════════════════════
+AOS.init({duration:800,once:true,offset:60});
+
+// ═══════════════════════════════════════════════
+// ADMIN — AUTH
+// ═══════════════════════════════════════════════
+let tapCount=0, tapTimer=null;
+function adminTap(){
+  tapCount++;
+  clearTimeout(tapTimer);
+  tapTimer=setTimeout(()=>{tapCount=0;},2000);
+  if(tapCount>=5){tapCount=0;openAdmin();}
+}
+function openAdmin(){
+  document.getElementById('admin-overlay').classList.add('active');
+  document.getElementById('admin-login-panel').style.display='block';
+  document.getElementById('admin-main').style.display='none';
+  document.getElementById('admin-pass').value='';
+  document.getElementById('admin-err').style.display='none';
+}
+function closeAdmin(){
+  document.getElementById('admin-overlay').classList.remove('active');
+}
+function adminLogin(){
+  const pass=document.getElementById('admin-pass').value;
+  if(pass===(CFG.adminPass||DEFAULTS.adminPass)){
+    document.getElementById('admin-err').style.display='none';
+    document.getElementById('admin-login-panel').style.display='none';
+    document.getElementById('admin-main').style.display='block';
+    populateAdminFields();
+    loadAdminWishes();
+  } else {
+    document.getElementById('admin-err').style.display='block';
+    document.getElementById('admin-pass').value='';
+    document.getElementById('admin-pass').focus();
+  }
+}
+document.getElementById('admin-pass').addEventListener('keydown',e=>{ if(e.key==='Enter') adminLogin(); });
+document.getElementById('admin-overlay').addEventListener('click',e=>{ if(e.target===document.getElementById('admin-overlay')) closeAdmin(); });
+
+// ═══════════════════════════════════════════════
+// ADMIN — TABS
+// ═══════════════════════════════════════════════
+function switchTab(id){
+  document.querySelectorAll('.admin-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  const pane=document.getElementById(id); if(pane) pane.classList.add('active');
+  const btn=event.target; if(btn) btn.classList.add('active');
+  if(id==='tab-ucapan') loadAdminWishes();
+}
+
+// ═══════════════════════════════════════════════
+// ADMIN — POPULATE FIELDS FROM CFG
+// ═══════════════════════════════════════════════
+function populateAdminFields(){
+  // Colors
+  setAdminColor('c-ivory','c-ivory-txt', CFG.colors.ivory);
+  setAdminColor('c-rose','c-rose-txt',   CFG.colors.rose);
+  setAdminColor('c-wine','c-wine-txt',   CFG.colors.wine);
+  setAdminColor('c-gold','c-gold-txt',   CFG.colors.gold);
+  setAdminColor('c-sage','c-sage-txt',   CFG.colors.sage);
+  setAdminColor('c-dark','c-dark-txt',   CFG.colors.dark);
+  // Cover
+  setVal('a-cover-eyebrow', CFG.cover.eyebrow);
+  setVal('a-bride-short',   CFG.cover.brideShort);
+  setVal('a-groom-short',   CFG.cover.groomShort);
+  setVal('a-cover-date',    CFG.cover.date);
+  setVal('a-btn-open',      CFG.cover.btnOpen);
+  setVal('a-video-url',     CFG.cover.videoUrl);
+  // Couple
+  setVal('a-couple-eyebrow', CFG.couple.eyebrow);
+  setVal('a-couple-title',   CFG.couple.title);
+  setVal('a-couple-desc',    CFG.couple.desc);
+  setVal('a-bride-photo',    CFG.couple.bridePhoto);
+  setVal('a-bride-name',     CFG.couple.brideName);
+  setVal('a-bride-fullname', CFG.couple.brideFullname);
+  setVal('a-bride-parents',  CFG.couple.brideParents);
+  setVal('a-groom-photo',    CFG.couple.groomPhoto);
+  setVal('a-groom-name',     CFG.couple.groomName);
+  setVal('a-groom-fullname', CFG.couple.groomFullname);
+  setVal('a-groom-parents',  CFG.couple.groomParents);
+  // Event
+  setVal('a-event-eyebrow',  CFG.event.eyebrow);
+  setVal('a-event-title',    CFG.event.title);
+  setVal('a-akad-type',      CFG.event.akadType);
+  setVal('a-akad-title',     CFG.event.akadTitle);
+  setVal('a-akad-date',      CFG.event.akadDate);
+  setVal('a-akad-time',      CFG.event.akadTime);
+  setVal('a-akad-place',     CFG.event.akadPlace);
+  setVal('a-resepsi-type',   CFG.event.resepsiType);
+  setVal('a-resepsi-title',  CFG.event.resepsiTitle);
+  setVal('a-resepsi-date',   CFG.event.resepsiDate);
+  setVal('a-resepsi-time',   CFG.event.resepsiTime);
+  setVal('a-resepsi-place',  CFG.event.resepsiPlace);
+  setVal('a-maps-url',       CFG.event.mapsUrl);
+  setVal('a-countdown-date', CFG.event.countdownDate);
+  setVal('a-cd-title',       CFG.event.cdTitle);
+  // Love Story
+  setVal('a-ls-eyebrow', CFG.lovestory.eyebrow);
+  setVal('a-ls-title',   CFG.lovestory.title);
+  setVal('a-ls-desc',    CFG.lovestory.desc);
+  setVal('a-ls-photo',   CFG.lovestory.heroPhoto);
+  setVal('a-ls-caption', CFG.lovestory.caption);
+  renderAdminStoryItems();
+  // Gallery
+  setVal('a-gallery-eyebrow', CFG.gallery.eyebrow);
+  setVal('a-gallery-title',   CFG.gallery.title);
+  setVal('a-gallery-hero',    CFG.gallery.heroImg);
+  const g = CFG.gallery.grid||[];
+  setVal('a-grid-1', g[0]||''); setVal('a-grid-2', g[1]||''); setVal('a-grid-3', g[2]||'');
+  renderAdminTickerItems();
+  // Gift
+  setVal('a-gift-eyebrow', CFG.gift.eyebrow);
+  setVal('a-gift-title',   CFG.gift.title);
+  setVal('a-gift-desc',    CFG.gift.desc);
+  renderAdminGiftAccounts();
+  // Footer
+  setVal('a-footer-names', CFG.footer.names);
+  setVal('a-footer-verse', CFG.footer.verse);
+  setVal('a-footer-date',  CFG.footer.date);
+  setVal('a-page-title',   CFG.footer.pageTitle);
+  // Media
+  setVal('a-music-url', CFG.media.musicUrl);
+}
+
+function setVal(id,val){ const el=document.getElementById(id); if(el) el.value=val||''; }
+function getVal(id){ const el=document.getElementById(id); return el?el.value:''; }
+function setAdminColor(pickerId,txtId,val){ const p=document.getElementById(pickerId); const t=document.getElementById(txtId); if(p) p.value=val||'#000000'; if(t) t.value=val||''; }
+function syncColorInput(picker,txtId){ const t=document.getElementById(txtId); if(t) t.value=picker.value; }
+function syncColorPicker(txt,pickerId){ const p=document.getElementById(pickerId); if(p&&/^#[0-9a-fA-F]{6}$/.test(txt.value)) p.value=txt.value; }
+
+// ═══════════════════════════════════════════════
+// STORY ITEMS ADMIN
+// ═══════════════════════════════════════════════
+function renderAdminStoryItems(){
+  const cont=document.getElementById('a-story-items');
+  if(!cont) return;
+  const items=CFG.lovestory.items||[];
+  cont.innerHTML=items.map((it,i)=>`
+    <div class="story-item-block" id="story-block-${i}">
+      <button class="del-btn" onclick="deleteStoryItem(${i})">✕</button>
+      <div class="admin-row">
+        <div class="admin-group"><label class="admin-label">Emoji</label><input type="text" class="admin-input" id="si-icon-${i}" value="${escHtml(it.icon||'')}"></div>
+        <div class="admin-group"><label class="admin-label">Tahun / Periode</label><input type="text" class="admin-input" id="si-year-${i}" value="${escHtml(it.year||'')}"></div>
+      </div>
+      <div class="admin-group"><label class="admin-label">Judul</label><input type="text" class="admin-input" id="si-title-${i}" value="${escHtml(it.title||'')}"></div>
+      <div class="admin-group"><label class="admin-label">Deskripsi</label><textarea class="admin-textarea" style="min-height:60px;" id="si-desc-${i}">${escHtml(it.desc||'')}</textarea></div>
+    </div>`).join('');
+}
+function addStoryItem(){
+  if(!CFG.lovestory.items) CFG.lovestory.items=[];
+  CFG.lovestory.items.push({icon:'🌟',year:'',title:'Momen Baru',desc:''});
+  renderAdminStoryItems();
+}
+function deleteStoryItem(i){ CFG.lovestory.items.splice(i,1); renderAdminStoryItems(); }
+function collectStoryItems(){
+  const items=[];
+  document.querySelectorAll('[id^="story-block-"]').forEach((_,i)=>{
+    items.push({ icon:getVal(`si-icon-${i}`), year:getVal(`si-year-${i}`), title:getVal(`si-title-${i}`), desc:getVal(`si-desc-${i}`) });
+  });
+  return items;
+}
+
+// ═══════════════════════════════════════════════
+// TICKER ITEMS ADMIN
+// ═══════════════════════════════════════════════
+function renderAdminTickerItems(){
+  const cont=document.getElementById('a-ticker-items');
+  if(!cont) return;
+  const items=CFG.gallery.ticker||[];
+  cont.innerHTML=items.map((src,i)=>`
+    <div class="story-item-block" id="ticker-block-${i}" style="padding:.7rem;">
+      <button class="del-btn" onclick="deleteTickerItem(${i})">✕</button>
+      <div style="display:flex;gap:.6rem;align-items:center;">
+        <input type="text" class="admin-input" id="ti-src-${i}" value="${escHtml(src)}" style="flex:1;">
+      </div>
+      <div class="upload-row">
+        <input type="file" accept="image/*" class="admin-file-input" id="file-ticker-${i}" onchange="uploadFileAndSetInput(this.files[0],'ti-src-${i}','photos','status-ticker-${i}')">
+        <label for="file-ticker-${i}" class="btn-admin-outline btn-upload-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</label>
+        <span class="upload-status" id="status-ticker-${i}"></span>
+      </div>
+    </div>`).join('');
+}
+function addTickerItem(){ if(!CFG.gallery.ticker) CFG.gallery.ticker=[]; CFG.gallery.ticker.push(''); renderAdminTickerItems(); }
+function deleteTickerItem(i){ CFG.gallery.ticker.splice(i,1); renderAdminTickerItems(); }
+function collectTickerItems(){ const a=[]; document.querySelectorAll('[id^="ticker-block-"]').forEach((_,i)=>a.push(getVal(`ti-src-${i}`))); return a; }
+
+// ═══════════════════════════════════════════════
+// GIFT ACCOUNTS ADMIN
+// ═══════════════════════════════════════════════
+function renderAdminGiftAccounts(){
+  const cont=document.getElementById('a-gift-accounts');
+  if(!cont) return;
+  const accounts=CFG.gift.accounts||[];
+  cont.innerHTML=accounts.map((acc,i)=>`
+    <div class="story-item-block" id="gift-block-${i}">
+      <button class="del-btn" onclick="deleteGiftAccount(${i})">✕</button>
+      <div class="admin-row">
+        <div class="admin-group"><label class="admin-label">Nama Bank</label><input type="text" class="admin-input" id="ga-bank-${i}" value="${escHtml(acc.bank||'')}"></div>
+        <div class="admin-group"><label class="admin-label">Nomor Rekening</label><input type="text" class="admin-input" id="ga-acc-${i}" value="${escHtml(acc.account||'')}"></div>
+      </div>
+      <div class="admin-group"><label class="admin-label">Nama Pemilik (a/n ...)</label><input type="text" class="admin-input" id="ga-name-${i}" value="${escHtml(acc.name||'')}"></div>
+    </div>`).join('');
+}
+function addGiftAccount(){ if(!CFG.gift.accounts) CFG.gift.accounts=[]; CFG.gift.accounts.push({bank:'',account:'',name:''}); renderAdminGiftAccounts(); }
+function deleteGiftAccount(i){ CFG.gift.accounts.splice(i,1); renderAdminGiftAccounts(); }
+function collectGiftAccounts(){ const a=[]; document.querySelectorAll('[id^="gift-block-"]').forEach((_,i)=>a.push({bank:getVal(`ga-bank-${i}`),account:getVal(`ga-acc-${i}`),name:getVal(`ga-name-${i}`)})); return a; }
+
+// ═══════════════════════════════════════════════
+// ADMIN SAVES
+// ═══════════════════════════════════════════════
+function showToast(id){ const el=document.getElementById(id); if(!el) return; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2500); }
+
+function saveColors(){
+  CFG.colors = { ivory:getVal('c-ivory-txt'), rose:getVal('c-rose-txt'), wine:getVal('c-wine-txt'), gold:getVal('c-gold-txt'), sage:getVal('c-sage-txt'), dark:getVal('c-dark-txt') };
+  cfgRef.update({colors:CFG.colors}).then(()=>{ applyColors(); showToast('toast-warna'); });
+}
+function saveCover(){
+  CFG.cover = { eyebrow:getVal('a-cover-eyebrow'), brideShort:getVal('a-bride-short'), groomShort:getVal('a-groom-short'), date:getVal('a-cover-date'), btnOpen:getVal('a-btn-open'), videoUrl:getVal('a-video-url') };
+  cfgRef.update({cover:CFG.cover}).then(()=>{ applyCover(); showToast('toast-cover'); });
+}
+function saveMempelai(){
+  CFG.couple = { eyebrow:getVal('a-couple-eyebrow'), title:getVal('a-couple-title'), desc:getVal('a-couple-desc'), bridePhoto:getVal('a-bride-photo'), brideName:getVal('a-bride-name'), brideFullname:getVal('a-bride-fullname'), brideParents:getVal('a-bride-parents'), groomPhoto:getVal('a-groom-photo'), groomName:getVal('a-groom-name'), groomFullname:getVal('a-groom-fullname'), groomParents:getVal('a-groom-parents') };
+  cfgRef.update({couple:CFG.couple}).then(()=>{ applyCouple(); showToast('toast-mempelai'); });
+}
+function saveAcara(){
+  CFG.event = { eyebrow:getVal('a-event-eyebrow'), title:getVal('a-event-title'), akadType:getVal('a-akad-type'), akadTitle:getVal('a-akad-title'), akadDate:getVal('a-akad-date'), akadTime:getVal('a-akad-time'), akadPlace:getVal('a-akad-place'), resepsiType:getVal('a-resepsi-type'), resepsiTitle:getVal('a-resepsi-title'), resepsiDate:getVal('a-resepsi-date'), resepsiTime:getVal('a-resepsi-time'), resepsiPlace:getVal('a-resepsi-place'), mapsUrl:getVal('a-maps-url'), countdownDate:getVal('a-countdown-date'), cdTitle:getVal('a-cd-title') };
+  cfgRef.update({event:CFG.event}).then(()=>{ applyEvent(); startCountdown(); showToast('toast-acara'); });
+}
+function saveLoveStory(){
+  CFG.lovestory = { eyebrow:getVal('a-ls-eyebrow'), title:getVal('a-ls-title'), desc:getVal('a-ls-desc'), heroPhoto:getVal('a-ls-photo'), caption:getVal('a-ls-caption'), items:collectStoryItems() };
+  cfgRef.update({lovestory:CFG.lovestory}).then(()=>{ applyLoveStory(); showToast('toast-ls'); });
+}
+function saveGaleri(){
+  CFG.gallery = { eyebrow:getVal('a-gallery-eyebrow'), title:getVal('a-gallery-title'), heroImg:getVal('a-gallery-hero'), grid:[getVal('a-grid-1'),getVal('a-grid-2'),getVal('a-grid-3')], ticker:collectTickerItems() };
+  cfgRef.update({gallery:CFG.gallery}).then(()=>{ applyGallery(); showToast('toast-galeri'); });
+}
+function saveHadiah(){
+  CFG.gift = { eyebrow:getVal('a-gift-eyebrow'), title:getVal('a-gift-title'), desc:getVal('a-gift-desc'), accounts:collectGiftAccounts() };
+  cfgRef.update({gift:CFG.gift}).then(()=>{ applyGift(); showToast('toast-hadiah'); });
+}
+function saveFooter(){
+  CFG.footer = { names:getVal('a-footer-names'), verse:getVal('a-footer-verse'), date:getVal('a-footer-date'), pageTitle:getVal('a-page-title') };
+  cfgRef.update({footer:CFG.footer}).then(()=>{ applyFooter(); showToast('toast-footer'); });
+}
+function saveMedia(){
+  CFG.media = { musicUrl:getVal('a-music-url') };
+  cfgRef.update({media:CFG.media}).then(()=>{ applyMedia(); showToast('toast-media'); });
+}
+function changePassword(){
+  const curr=getVal('a-admin-pass-current');
+  const nw=getVal('a-admin-pass-new');
+  const conf=getVal('a-admin-pass-confirm');
+  if(curr!==(CFG.adminPass||DEFAULTS.adminPass)){ alert('❌ Password lama salah!'); return; }
+  if(!nw){ alert('Password baru tidak boleh kosong!'); return; }
+  if(nw!==conf){ alert('❌ Konfirmasi password tidak cocok!'); return; }
+  CFG.adminPass=nw;
+  cfgRef.update({adminPass:nw}).then(()=>{ alert('✅ Password berhasil diubah!'); setVal('a-admin-pass-current',''); setVal('a-admin-pass-new',''); setVal('a-admin-pass-confirm',''); });
+}
+
+// ═══════════════════════════════════════════════
+// ADMIN UCAPAN
+// ═══════════════════════════════════════════════
+function loadAdminWishes(){
+  const cont=document.getElementById('admin-wish-list');
+  if(!cont) return;
+  cont.innerHTML='<div style="text-align:center;padding:1rem;color:#9e7070;font-style:italic;">Memuat…</div>';
+  wishRef.once('value',snap=>{
+    const data=snap.val();
+    if(!data){ cont.innerHTML='<p style="color:#9e7070;font-size:.85rem;padding:.8rem;">Belum ada ucapan.</p>'; return; }
+    const arr=Object.entries(data).sort((a,b)=>(b[1].time||0)-(a[1].time||0));
+    const labels={hadir:'✓ Hadir',tidak:'✗ Tidak hadir',mungkin:'? Mungkin'};
+    cont.innerHTML=arr.map(([key,w])=>`
+      <div style="background:#2a1414;border:1px solid rgba(201,160,106,.15);padding:.8rem 1rem;margin-bottom:.5rem;display:flex;align-items:flex-start;gap:.8rem;">
+        <div style="flex:1;">
+          <span style="color:#C9A06A;font-weight:700;">${escHtml(w.name)}</span>
+          <span style="color:#A8B5A2;font-size:.7rem;margin-left:.5rem;">${labels[w.attend]||''}</span>
+          <p style="color:#FAF6F0;font-size:.85rem;margin:.3rem 0 .2rem;font-style:italic;">"${escHtml(w.msg)}"</p>
+          <p style="color:#666;font-size:.7rem;">${w.time?new Date(w.time).toLocaleString('id-ID'):''}</p>
+        </div>
+        <button onclick="deleteWish('${key}')" style="background:none;border:none;color:#c0392b;cursor:pointer;font-size:1rem;flex-shrink:0;" title="Hapus">✕</button>
+      </div>`).join('');
+  });
+}
+function deleteWish(key){
+  if(!confirm('Hapus ucapan ini?')) return;
+  wishRef.child(key).remove().then(()=>{ loadAdminWishes(); const t=document.getElementById('toast-ucapan'); if(t){t.textContent='✓ Dihapus!';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);} });
+}
+function resetWishes(){
+  if(!confirm('Yakin hapus SEMUA ucapan? Tidak dapat dibatalkan!')) return;
+  wishRef.remove().then(()=>{ loadAdminWishes(); alert('✅ Semua ucapan dihapus!'); });
+}
+</script>
+</body>
+</html>
